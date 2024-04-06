@@ -22,3 +22,7 @@ def classify_intent(query: Query):
     query_tfidf = tfidf_vectorizer.transform([query.query])
     intent = naive_bayes_classifier.predict(query_tfidf)[0]
     return {"intent": intent}
+
+@app.get("/")
+def hello():
+    return {"message": "Hello World"}
