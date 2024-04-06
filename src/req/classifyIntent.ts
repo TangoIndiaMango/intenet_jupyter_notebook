@@ -2,7 +2,9 @@
 
 import axios from "axios";
 
-const ClassifyUrl = "http://127.0.0.1:8000/classify_intent"
+// const ClassifyUrlLocal = "http://127.0.0.1:8000/classify_intent"
+
+const ClassifyUrl = process.env.API_URL!
 
 export async function classifyIntent(userQuery: string) {
     try {
