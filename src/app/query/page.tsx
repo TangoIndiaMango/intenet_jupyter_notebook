@@ -1,20 +1,26 @@
 "use client"
 import { useChat } from "ai/react";
 import { Atom, Send } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Home() {
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat();
 
+    useEffect(() => {
+      const messageContainer = document.getElementById('message-container');
+      messageContainer?.scrollTo(0, messageContainer.scrollHeight);
+    }, [messages])
+    
     return (
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4" id="message-container">
             <div className="pt-4 pb-32">
-                {messages.map((message, index) => (
-                    <div key={index} className={`border-t border-black/10 ${message.role === 'assistant' && 'bg-gray-50'}`}>
+                {messages.map((message) => (
+                    <div key={message.id} className={`border-t border-black/10 ${message.role === 'assistant' && 'bg-gray-50'}`}>
                         <div className="max-w-3xl mx-auto py-6 flex prose break-words">
                             {message.role === 'assistant' && <span><Atom className="" /></span>}
-                            <span className="ml-3">
+                            <div className="ml-3 rounded-lg">
                                 {message.content}
-                            </span>
+                            </div>
                         </div>
                     </div>
                 ))}
